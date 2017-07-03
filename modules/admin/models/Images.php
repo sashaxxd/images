@@ -15,6 +15,18 @@ use Yii;
 class Images extends \yii\db\ActiveRecord
 {
 
+    public  $image;
+    public $gallery;
+
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
 
 
     public static function tableName()
@@ -31,7 +43,9 @@ class Images extends \yii\db\ActiveRecord
             [['title', 'text', ], 'required'],
             [['text'], 'string'],
             [['title',], 'string', 'max' => 255],
-//         [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],
+
         ];
     }
 
@@ -47,9 +61,14 @@ class Images extends \yii\db\ActiveRecord
             'text' => 'Text',
         ];
     }
-    public function getImage()
-    {
-        return ($this->image) ? '' . $this->image : 'no-image.png';
+    public function upload(){
+        if($this->validate()){
+            $path = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
+            $this->attachImage($path);
+            return true;
+        }  else{
+            return false;
+        }
     }
-
 }

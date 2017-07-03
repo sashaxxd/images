@@ -65,15 +65,12 @@ class ImagesController extends Controller
     public function actionCreate()
     {
         $model = new Images();
-        if (Yii::$app->request->isPost) {
-            $model->image = UploadedFile::getInstance($model, 'image');
-                $filename = $model->image;
-              if($filename) {
-                  $filename->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
-              }
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if($model->image){
+                              $model->upload();
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
