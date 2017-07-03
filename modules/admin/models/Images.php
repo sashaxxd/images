@@ -47,4 +47,9 @@ class Images extends \yii\db\ActiveRecord
             'text' => 'Text',
         ];
     }
+    public function getImage()
+    {
+        return ($this->image) ? '' . $this->image : 'no-image.png';
+    }
+
 }

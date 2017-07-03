@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Картинка',
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::img(Url::toRoute('/'.'uploads'.'/'.$data->image),[
+                    return Html::img(Url::toRoute('/'.'uploads'.'/'.$data->getImage()),[
                         'alt'=>'yii2 - картинка в gridview',
                         'style' => 'width:115px;'
                     ]);

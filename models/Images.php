@@ -17,4 +17,9 @@ class Images extends ActiveRecord
         return 'images';
     }
 
+    public function getImage()
+    {
+        return ($this->image) ? '' . $this->image : 'no-image.png';
+    }
+
 }

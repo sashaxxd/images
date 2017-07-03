@@ -67,10 +67,10 @@ class ImagesController extends Controller
         $model = new Images();
         if (Yii::$app->request->isPost) {
             $model->image = UploadedFile::getInstance($model, 'image');
-
-
-                $model->image->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
-
+                $filename = $model->image;
+              if($filename) {
+                  $filename->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
+              }
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
