@@ -36,12 +36,14 @@ class ImagesController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Images();
         $dataProvider = new ActiveDataProvider([
             'query' => Images::find(),
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 

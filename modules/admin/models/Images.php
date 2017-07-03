@@ -66,6 +66,7 @@ class Images extends \yii\db\ActiveRecord
             $path = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
             $this->image->saveAs($path);
             $this->attachImage($path);
+            @unlink($path);    //Удаляет оригинальный файл
             return true;
         }  else{
             return false;
