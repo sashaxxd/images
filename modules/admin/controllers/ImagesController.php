@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ImagesController implements the CRUD actions for Images model.
@@ -64,6 +65,13 @@ class ImagesController extends Controller
     public function actionCreate()
     {
         $model = new Images();
+        if (Yii::$app->request->isPost) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+
+
+                $model->image->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
+
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

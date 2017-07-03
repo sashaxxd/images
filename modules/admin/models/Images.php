@@ -14,9 +14,9 @@ use Yii;
  */
 class Images extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
+
+
+
     public static function tableName()
     {
         return 'images';
@@ -28,9 +28,10 @@ class Images extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'image', 'text'], 'required'],
+            [['title', 'text', ], 'required'],
             [['text'], 'string'],
-            [['title', 'image'], 'string', 'max' => 255],
+            [['title',], 'string', 'max' => 255],
+//         [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
         ];
     }
 

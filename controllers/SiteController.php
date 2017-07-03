@@ -124,17 +124,16 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
-    }
 
-    public function actionImages()
+    }
+       public function actionImages()
     {
         $model = Images::find()->all();
 
         return $this->render('images',
             [
                 'model' => $model,
+            ]);
 
-            ]
-            );
     }
 }
