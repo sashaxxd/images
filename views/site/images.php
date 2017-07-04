@@ -1,11 +1,12 @@
 <?php
-//print_r($model);
 
-foreach($model as $item):?>
+use yii\helpers\Html;
 
-    <?= $item->title; ?>
-    <div id="wb_Image1">
-        <img src="uploads/<?=  $item->getImage() ?>" width="200px">
-    </div>
+$images = $model->getImages();
+?>
+<?php
+foreach($images as $img): ?>
 
-   <?php endforeach; ?>
+<?= Html::img($img->getUrl('200x'))?>`
+
+<?php endforeach; ?>

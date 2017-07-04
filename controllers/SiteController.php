@@ -128,7 +128,8 @@ class SiteController extends Controller
     }
        public function actionImages()
     {
-        $model = Images::find()->all();
+
+        $model = Images::find()->where(['title' => 'sdfdsfdsf'])->limit(6)->all();
 
         return $this->render('images',
             [
